@@ -1,0 +1,130 @@
+[
+  {
+    "filename": "Diploma in Programming.pdf",
+    "title": "Diploma in Programming",
+    "issuer": "Indian Institute of Technology Madras",
+    "date": "30th December 2024",
+    "category": "Degrees",
+    "description": "Completed the requirements for the Diploma in Programming."
+  },
+  {
+    "filename": "Foundation Certificate.pdf",
+    "title": "Foundational Level in Programming and Data Science",
+    "issuer": "Indian Institute of Technology Madras",
+    "date": "January 2023",
+    "category": "Degrees",
+    "description": "Successfully completed the Foundational Level in Programming and Data Science."
+  },
+  {
+    "filename": "Group Leader.pdf",
+    "title": "Certificate of Appreciation - Leader Group 267",
+    "issuer": "IIT Madras B.S. Degree Program",
+    "date": "September 2023 to August 2024",
+    "category": "Soft Skills",
+    "description": "Awarded for outstanding contribution made to the General Student Body as a Group Leader."
+  },
+  {
+    "filename": "MMCC1.jpeg",
+    "title": "Guest Speaker - Unlock the Power of Data Science",
+    "issuer": "Marathwada Mitra Mandal's College of Commerce",
+    "date": "07/03/2025",
+    "category": "Soft Skills",
+    "description": "Served as a guest speaker to conduct a hands-on data science experience and real-life projects implementation session."
+  },
+  {
+    "filename": "Peer To Peer Session .png",
+    "title": "Web Development Peer To Peer Session",
+    "issuer": "Google Developer Group, Fergusson College Pune",
+    "date": "29th January 2026",
+    "category": "Programming",
+    "description": "Attended the Web Development Peer To Peer session."
+  },
+  {
+    "filename": "PharmaAI.pdf",
+    "title": "Certificate of Internship - Web Development",
+    "issuer": "PharmaAI",
+    "date": "January 2025 to February 2025",
+    "category": "Programming",
+    "description": "Completed a web development internship, focusing on developing and optimizing web applications and enhancing user interfaces."
+  },
+  {
+    "filename": "Tejas Patare.pdf",
+    "title": "Certificate of Participation - Smart India Hackathon 2023",
+    "issuer": "IIT Madras / Ministry of Education",
+    "date": "25th September 2023",
+    "category": "Hackathons",
+    "description": "Participated in the Internal Hackathon for SIH 2023 as part of team AyurTech.ai."
+  },
+  {
+    "filename": "Tejas certificate.pdf",
+    "title": "Internship Completion - Full Stack Development",
+    "issuer": "Sudha Gopalakrishnan Brain Centre, IIT Madras",
+    "date": "02-02-2026 to 31-03-2026",
+    "category": "Programming",
+    "description": "Successfully completed an internship actively involved in the Full Stack Development Team."
+  },
+  {
+    "filename": "Understanding GCP.pdf",
+    "title": "Understanding Google Cloud Platform",
+    "issuer": "IIT Madras BS Program",
+    "date": "17th January 2025 - 19th January 2025",
+    "category": "Cloud",
+    "description": "Successfully completed the workshop on Understanding Google Cloud Platform."
+  },
+  {
+    "filename": "certificate (1).png",
+    "title": "Certificate of Participation - Byte Battle",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Hackathons",
+    "description": "Recognized for active participation in Byte Battle at IITM Paradox'23."
+  },
+  {
+    "filename": "certificate (2).png",
+    "title": "Certificate of Participation - Squid Game",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Extra-curricular",
+    "description": "Recognized for active participation in Squid Game at IITM Paradox'23."
+  },
+  {
+    "filename": "certificate (3).png",
+    "title": "Certificate of Participation - Paradox Premier League",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Extra-curricular",
+    "description": "Recognized for active participation in Paradox Premier League at IITM Paradox'23."
+  },
+  {
+    "filename": "certificate (4).png",
+    "title": "Certificate of Participation - Badminton",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Extra-curricular",
+    "description": "Recognized for active participation in Badminton at IITM Paradox'23."
+  },
+  {
+    "filename": "certificate (5).png",
+    "title": "Certificate of Participation - Slow Cycling",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Extra-curricular",
+    "description": "Recognized for active participation in Slow Cycling at IITM Paradox'23."
+  },
+  {
+    "filename": "certificate.pdf",
+    "title": "Certificate of Appreciation - Python Coding Challenge",
+    "issuer": "IITM B.S. Degree Program",
+    "date": "2024",
+    "category": "Programming",
+    "description": "Active participation in Python Coding Challenge at IITM Paradox in Margazhi'24."
+  },
+  {
+    "filename": "certificate.png",
+    "title": "Certificate of Participation - Hack-O-Pitch 2.0",
+    "issuer": "IITM BS Degree Program",
+    "date": "2023",
+    "category": "Hackathons",
+    "description": "Recognized for active participation in Hack-O-Pitch 2.0 at IITM Paradox'23."
+  }
+]
