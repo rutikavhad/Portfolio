@@ -159,8 +159,13 @@
         .hero-card-header { display: flex; gap: 8px; margin-bottom: 1.5rem; }
         .hero-card-dot { width: 12px; height: 12px; border-radius: 50%; }
         .hero-card-dot.red { background: #ff5f57; } .hero-card-dot.yellow { background: #ffbd2e; } .hero-card-dot.green { background: #28ca41; }
-        .hero-card-code { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8; }
+        .hero-card-code { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; max-height: 320px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--accent) transparent; }
         .hero-card-code .keyword { color: #ff79c6; } .hero-card-code .function { color: #50fa7b; } .hero-card-code .string { color: #f1fa8c; } .hero-card-code .comment { color: #6272a4; } .hero-card-code .variable { color: #8be9fd; }
+        .hero-card-code .cursor-blink { display: inline-block; width: 8px; height: 15px; background: var(--accent); animation: blink 1s infinite; vertical-align: middle; margin-left: 2px; }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        .hero-card-code .glitch-text { color: var(--danger); animation: glitch 0.3s ease; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(2px, -2px); } 60% { transform: translate(-2px); } 80% { transform: translate(2px); } 100% { transform: translate(0); } }
+        .hero-card-code .success-line { color: var(--accent); font-weight: 700; text-shadow: 0 0 10px var(--accent-glow); }
 
         .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; animation: scrollBounce 2s ease-in-out infinite; }
         @keyframes scrollBounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(15px); } }
@@ -177,53 +182,38 @@
         .reveal-right.visible { opacity: 1; transform: translateX(0); }
         .reveal-scale { opacity: 0; transform: scale(0.8); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal-scale.visible { opacity: 1; transform: scale(1); }
-        .stagger-children > * { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
-        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
 
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-children.visible > *:nth-child(1){transition-delay:.1s;}
+        .stagger-children.visible > *:nth-child(2){transition-delay:.2s;}
+        .stagger-children.visible > *:nth-child(3){transition-delay:.3s;}
+        .stagger-children.visible > *:nth-child(4){transition-delay:.4s;}
+        .stagger-children.visible > *:nth-child(5){transition-delay:.5s;}
+        .stagger-children.visible > *:nth-child(6){transition-delay:.6s;}
+        .stagger-children.visible > *:nth-child(7){transition-delay:.7s;}
+        .stagger-children.visible > *:nth-child(8){transition-delay:.8s;}
         section { padding: 7rem 0; position: relative; }
         .section-header { margin-bottom: 3.5rem; text-align: center; }
         .section-tag { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid rgba(0, 230, 118, 0.2); border-radius: 50px; background: rgba(0, 230, 118, 0.05); }
-        .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 2.8vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
         .section-subtitle { color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .about-image-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: var(--transition-smooth);
-        }
-        .about-image-wrapper:hover { 
-            transform: scale(1.05); 
-        }
-        .about-image-wrapper img { 
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 40px var(--accent-glow), 0 10px 40px rgba(0,0,0,0.5);
-            transition: var(--transition-bounce);
-        }
-        .about-image-wrapper:hover img { 
-            transform: scale(1.05);
-            box-shadow: 0 0 60px var(--accent-glow), 0 0 100px rgba(0, 230, 118, 0.3);
-            border-color: #fff;
-        }
+        .about-image-wrapper { display: flex; justify-content: center; align-items: center; transition: var(--transition-smooth); }
+        .about-image-wrapper:hover { transform: scale(1.05); }
+        .about-image-wrapper img { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--accent); box-shadow: 0 0 40px var(--accent-glow), 0 10px 40px rgba(0,0,0,0.5); transition: var(--transition-bounce); }
+        .about-image-wrapper:hover img { transform: scale(1.05); box-shadow: 0 0 60px var(--accent-glow), 0 0 100px rgba(0, 230, 118, 0.3); border-color: #fff; }
         .about-info h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem; }
         .about-info p { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8; }
-        .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
-        .highlight-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); transition: var(--transition-bounce); cursor: default; }
-        .highlight-item:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
-        .highlight-icon { width: 44px; height: 44px; background: rgba(0, 230, 118, 0.1); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
-        .highlight-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
-        .highlight-text p { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
 
         .skills-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.8rem; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .skill-node { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 90px; height: 90px; transition: var(--transition-bounce); cursor: pointer; position: relative; text-decoration: none; }
@@ -350,53 +340,28 @@
             .cursor-dot, .cursor-ring { display: none; }
             body { cursor: auto; }
         }
-    .hero-card-code {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    max-height: 320px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) transparent;
-}
-    
 
-
-
-
-
-        /* Typewriter blinking cursor */
-.hero-card-code .cursor-blink {
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background: var(--accent);
-    animation: blink 1s infinite;
-    vertical-align: middle;
-    margin-left: 2px;
-}
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-
-/* Glitch text effect */
-.hero-card-code .glitch-text {
-    color: var(--danger);
-    animation: glitch 0.3s ease;
-}
-@keyframes glitch { 
-    0% { transform: translate(0); } 
-    20% { transform: translate(-2px, 2px); } 
-    40% { transform: translate(2px, -2px); } 
-    60% { transform: translate(-2px); } 
-    80% { transform: translate(2px); } 
-    100% { transform: translate(0); } 
+/* Force all projects to show */
+#projectsGrid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+    gap: 1.8rem !important;
+    width: 100% !important;
+    min-height: 200px !important;
 }
 
-.hero-card-code .success-line {
-    color: var(--accent);
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--accent-glow);
+/* Make sure section is visible */
+#projects {
+    display: block !important;
+    min-height: 500px !important;
+    padding: 7rem 0 !important;
 }
+
+/* Remove any overflow hiding */
+.container {
+    overflow: visible !important;
+}
+
 
 
     </style>
@@ -413,7 +378,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#journey">Journey</a></li><li><a href="#projects">Projects</a></li><li><a href="#certificates">Certificates</a></li><li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="https://drive.google.com/file/d/1pbQlNucWHP4YDmSJnPteppxpUDRLFI_b/view?usp=sharing" target="_blank" class="nav-resume"><i class="fa-solid fa-download"></i> Resume</a>
+        <a href="https://drive.google.com/file/d/1aEqhrsDzT65pklJOVvke_6ttVVVe5CjP/view?usp=sharing" target="_blank" class="nav-resume"><i class="fa-solid fa-download"></i> Resume</a>
         <button class="hamburger" id="hamburgerBtn">☰</button>
     </nav>
 
@@ -423,28 +388,21 @@
             <h1 class="hero-name">Rutik <span class="highlight">Avhad</span></h1>
             <p class="hero-role"><span class="typing" id="typingText"></span></p>
             <p class="hero-desc">Full Stack Developer specializing in building scalable, high-performance web applications using modern technologies and best practices.</p>
-            <div class="hero-stats"><div class="hero-stat"><span class="hero-stat-value">6+</span><span class="hero-stat-label">Projects</span></div><div class="hero-stat"></div></div>
+            <div class="hero-stats"><div class="hero-stat"><span class="hero-stat-value">7+</span><span class="hero-stat-label">Projects</span></div></div>
             <div class="hero-cta"><a href="#contact" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Get In Touch</a><a href="#projects" class="btn-outline"><i class="fa-solid fa-code"></i> View Work</a></div>
         </div>
-        <div class="hero-visual"><div class="hero-card"><div class="hero-card-header"><span class="hero-card-dot red"></span><span class="hero-card-dot yellow"></span><span class="hero-card-dot green"></span></div><div class="hero-card-code" id="heroCodeDisplay">
-    <span class="comment"># hack.py - Initializing...</span><br>
-    <span class="keyword">import</span> time, random<br><br>
-    <span class="comment"># Scanning network...</span><br>
-    <span class="variable">target</span> = <span class="string">'192.168.1.1'</span><br>
-    <span class="function">connect</span>(target)<br>
-    <span class="comment"># Bypassing firewall... 45%</span>
-</div></div></div>
+        <div class="hero-visual"><div class="hero-card"><div class="hero-card-header"><span class="hero-card-dot red"></span><span class="hero-card-dot yellow"></span><span class="hero-card-dot green"></span></div><div class="hero-card-code" id="heroCodeDisplay"></div></div></div>
     </div></div><div class="scroll-indicator"><div class="scroll-mouse"></div><span class="scroll-text">Scroll</span></div></section>
 
-    <section id="about"><div class="container"><div class="section-header reveal"><p class="section-tag">// About Me</p><h2 class="section-title">Whoami? A Builder of secure and scalable Software.</h2></div><div class="about-grid"><div class="about-image-wrapper reveal-left"><img src="static/photo.png" alt="Rutik Avhad" style="width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow);"></div><div class="about-info reveal-right"><h3>Hello, I'm <span style="color:var(--accent);">Rutik</span></h3><p>I'm Rutik Avhad, a Computer Science postgraduate specializing in Software Development and Cybersecurity. I build secure, scalable, and high-performance applications using Python, Flask, Django, and PostgreSQL. My experience includes developing web security solutions, vulnerability assessment tools, REST APIs, and full-stack applications. I am passionate about solving complex technical challenges, writing clean and maintainable code, and creating software that delivers real-world impact. With a strong foundation in backend engineering, application security, and system design, I continuously explore emerging technologies to enhance my skills and contribute to innovative development teams.</p><div class="about-highlights stagger-children"></div></div></div></div></section>
+    <section id="about"><div class="container"><div class="section-header reveal"><p class="section-tag">// About Me</p><h2 class="section-title">Whoami? A Builder of secure and scalable Software.</h2></div><div class="about-grid"><div class="about-image-wrapper reveal-left"><img src="static/photo.png" alt="Rutik Avhad"></div><div class="about-info reveal-right"><h3>Hello, I'm <span style="color:var(--accent);">Rutik</span></h3><p>I'm Rutik Avhad, a Computer Science postgraduate specializing in Software Development and Cybersecurity. I build secure, scalable, and high-performance applications using Python, Flask, Django, and PostgreSQL. My experience includes developing web security solutions, vulnerability assessment tools, REST APIs, and full-stack applications. I am passionate about solving complex technical challenges, writing clean and maintainable code, and creating software that delivers real-world impact. With a strong foundation in backend engineering, application security, and system design, I continuously explore emerging technologies to enhance my skills and contribute to innovative development teams.</p></div></div></div></section>
 
     <section id="skills"><div class="container"><div class="section-header reveal"><p class="section-tag">// Tech Stack</p><h2 class="section-title">Technologies I Work With</h2></div><div class="skills-container"><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/python" alt="Python"><span class="skill-name">Python</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/javascript" alt="JS"><span class="skill-name">JavaScript</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/vuedotjs" alt="Vue"><span class="skill-name">Vue.js</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/react" alt="React"><span class="skill-name">React</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/django" alt="Django"><span class="skill-name">Django</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/flask/white" alt="Flask"><span class="skill-name">Flask</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL"><span class="skill-name">PostgreSQL</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/docker" alt="Docker"><span class="skill-name">Docker</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/git" alt="Git"><span class="skill-name">Git</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/linux" alt="Linux"><span class="skill-name">Linux</span></div><div class="skill-node reveal-scale"><i class="fa-solid fa-brain" style="color:#ff6f00;"></i><span class="skill-name">ML/AI</span></div><div class="skill-node reveal-scale"><img src="https://cdn.simpleicons.org/googlecloud" alt="GCP"><span class="skill-name">GCP</span></div></div></div></section>
 
-    <section id="journey"><div class="container"><div class="journey-hero reveal"><span class="section-tag">// My Journey</span><h2 class="journey-heading">Academic<span class="journey-heading-italic">Odyssey.</span></h2></div><div class="journey-timeline"><div class="journey-step reveal"><div class="journey-step-number">O1</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2019–2021</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">FOUNDATION</p><h3 class="journey-step-title">Higher Secondary</h3><p class="journey-step-inst">RBNB College</p><p class="journey-step-desc">Demonstrated high adaptability and personal growth throughout high school.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O2</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2021–2024</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">CORE LEARNING</p><h3 class="journey-step-title">BSc Computer Science</h3><p class="journey-step-inst">RBNB Collage</p><p class="journey-step-desc">Mastered core computer science concepts while developing strong technical problem-solving skills.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O3</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2024–2026</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">ADVANCED</p><h3 class="journey-step-title">MSc Computer Science</h3><p class="journey-step-inst">Savitribai Phule Pune University Department of Computer Science</p><p class="journey-step-desc">Developed advanced problem-solving skills rooted in computational thinking, machine learning, and applied mathematics.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O4</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">May 2026-> </span><span class="journey-step-tag">NEXT-></span></div><p class="journey-step-keyword">THE WHY</p><h3 class="journey-step-title">Building Secure Digital Experiences</h3><p class="journey-step-inst">Fresher</p><p class="journey-step-desc">Currently looking for challenging opportunities as a Software Developer to leverage my tech stack from PUCSD and design secure, scalable software products.</p></div></div></div></div></div></section>
+    <section id="journey"><div class="container"><div class="journey-hero reveal"><span class="section-tag">// My Journey</span><h2 class="journey-heading">Academic<span class="journey-heading-italic">Odyssey.</span></h2></div><div class="journey-timeline"><div class="journey-step reveal"><div class="journey-step-number">O1</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2019–2021</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">FOUNDATION</p><h3 class="journey-step-title">Higher Secondary</h3><p class="journey-step-inst">RBNB College</p><p class="journey-step-desc">Demonstrated high adaptability and personal growth throughout high school.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O2</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2021–2024</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">CORE LEARNING</p><h3 class="journey-step-title">BSc Computer Science</h3><p class="journey-step-inst">RBNB Collage</p><p class="journey-step-desc">Mastered core computer science concepts while developing strong technical problem-solving skills.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O3</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">2024–2026</span><span class="journey-step-tag">EDUCATION</span></div><p class="journey-step-keyword">ADVANCED</p><h3 class="journey-step-title">MSc Computer Science</h3><p class="journey-step-inst">Savitribai Phule Pune University Department of Computer Science</p><p class="journey-step-desc">Developed advanced problem-solving skills rooted in computational thinking, machine learning, and applied mathematics.</p></div></div><div class="journey-step reveal"><div class="journey-step-number">O4</div><div class="journey-step-content"><div class="journey-step-meta"><span class="journey-step-date">May 2026 →</span><span class="journey-step-tag">NEXT →</span></div><p class="journey-step-keyword">THE WHY</p><h3 class="journey-step-title">Building Secure Digital Experiences</h3><p class="journey-step-inst">Fresher</p><p class="journey-step-desc">Currently looking for challenging opportunities as a Software Developer to design secure, scalable software products.</p></div></div></div></div></section>
 
     <section id="projects"><div class="container"><div class="section-header reveal"><p class="section-tag">// Portfolio</p><h2 class="section-title">Featured Projects</h2></div><div class="projects-grid stagger-children" id="projectsGrid"></div></div></section>
 
-    <!--<section id="certificates"><div class="container"><div class="section-header reveal"><p class="section-tag">// Certificates</p><h2 class="section-title">Things I've Learned</h2></div><div class="certificates-grid stagger-children" id="certsGrid"></div></div></section>-->
+    <section id="certificates"><div class="container"><div class="section-header reveal"><p class="section-tag">// Certificates</p><h2 class="section-title">Things I've Learned</h2></div><div class="certificates-grid stagger-children" id="certsGrid"></div></div></section>
 
     <section id="contact"><div class="container"><div class="section-header reveal"><p class="section-tag">// Get In Touch</p><h2 class="section-title">Let's Build Something</h2></div><div style="text-align:center;" class="reveal"><p style="color:var(--text-secondary);font-size:1.2rem;margin-bottom:1.5rem;"><i class="fa-solid fa-envelope" style="color:var(--accent);margin-right:0.5rem;"></i> rutikavhad2211@gmail.com</p><div class="social-links"><a href="https://github.com/rutikavhad" target="_blank"><i class="fa-brands fa-github"></i></a><a href="https://linkedin.com/in/rutikavhad/" target="_blank"><i class="fa-brands fa-linkedin"></i></a><a href="https://x.com/rutikavhad" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></div></div></div></section>
     <footer><p>© 2026 Rutik Avhad | Built with ❤️ and ☕</p></footer>
@@ -474,12 +432,12 @@
     document.querySelectorAll('a,button,.project-card,.certificate-card,.skill-node,input,.highlight-item,.hero-card,.about-image-wrapper').forEach(el=>{el.addEventListener('mouseenter',()=>{cursorDot.classList.add('hover');cursorRing.classList.add('hover');});el.addEventListener('mouseleave',()=>{cursorDot.classList.remove('hover');cursorRing.classList.remove('hover');});});
 
     // ========== TYPING ==========
-    const roles=['Full Stack Developer','Data Scientist','ML Engineer','Problem Solver'];
+    const roles=['Full Stack Developer','Cybersecurity Specialist','Backend Engineer','Problem Solver'];
     let ri=0,ci=0,del=false;const te=document.getElementById('typingText');
     function type(){const c=roles[ri];te.textContent=c.substring(0,del?ci--:ci++);if(!del&&ci===c.length)setTimeout(()=>del=true,1800);else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;}setTimeout(type,del?45:90);}
     type();
 
-    // ========== HACKING ANIMATION (LOOPING) ==========
+    // ========== HACKING ANIMATION ==========
     const codeDisplay = document.getElementById('heroCodeDisplay');
     const hackingSteps = [
         { text: '<span class="comment"># hack.py - Establishing connection...</span>', delay: 300 },
@@ -508,75 +466,22 @@
     ];
 
     let stepIndex = 0;
-    const progressEl = null;
-
     function displayNextStep() {
-        if (stepIndex >= hackingSteps.length) {
-            stepIndex = 0;
-            codeDisplay.innerHTML = '';
-            setTimeout(displayNextStep, 300);
-            return;
-        }
-
+        if (stepIndex >= hackingSteps.length) { stepIndex = 0; codeDisplay.innerHTML = ''; setTimeout(displayNextStep, 300); return; }
         const step = hackingSteps[stepIndex];
         const line = document.createElement('div');
         line.innerHTML = step.text;
-        line.style.opacity = '0';
-        line.style.transform = 'translateX(-10px)';
-        line.style.transition = 'opacity 0.2s, transform 0.3s';
+        line.style.opacity = '0'; line.style.transform = 'translateX(-10px)'; line.style.transition = 'opacity 0.2s, transform 0.3s';
         codeDisplay.appendChild(line);
-
-        // Auto-scroll to bottom
         codeDisplay.scrollTop = codeDisplay.scrollHeight;
-
-        // Fade in
-        setTimeout(() => {
-            line.style.opacity = '1';
-            line.style.transform = 'translateX(0)';
-        }, 50);
-
-        // Glitch effect on ACCESS GRANTED
-        if (step.text.includes('ACCESS GRANTED')) {
-            setTimeout(() => {
-                line.classList.add('glitch-text');
-                setTimeout(() => line.classList.remove('glitch-text'), 500);
-            }, 200);
-        }
-
-        // Progress animation
+        setTimeout(() => { line.style.opacity = '1'; line.style.transform = 'translateX(0)'; }, 50);
+        if (step.text.includes('ACCESS GRANTED')) { setTimeout(() => { line.classList.add('glitch-text'); setTimeout(() => line.classList.remove('glitch-text'), 500); }, 200); }
         const progressSpan = line.querySelector('#hackProgress');
-        if (progressSpan) {
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += Math.floor(Math.random() * 15) + 5;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(progressInterval);
-                    progressSpan.textContent = '100%';
-                    progressSpan.style.color = 'var(--accent)';
-                } else {
-                    progressSpan.textContent = progress + '%';
-                }
-            }, 150);
-        }
-
-        // Remove old lines if too many (keep last 25 lines)
-        while (codeDisplay.children.length > 25) {
-            const firstChild = codeDisplay.firstChild;
-            firstChild.style.opacity = '0';
-            firstChild.style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                if (firstChild.parentNode) firstChild.parentNode.removeChild(firstChild);
-            }, 300);
-        }
-
-        stepIndex++;
-        setTimeout(displayNextStep, step.delay);
+        if (progressSpan) { let progress = 0; const pi = setInterval(() => { progress += Math.floor(Math.random() * 15) + 5; if (progress >= 100) { progress = 100; clearInterval(pi); progressSpan.textContent = '100%'; progressSpan.style.color = 'var(--accent)'; } else { progressSpan.textContent = progress + '%'; } }, 150); }
+        while (codeDisplay.children.length > 25) { const fc = codeDisplay.firstChild; fc.style.opacity = '0'; fc.style.transform = 'translateY(-10px)'; setTimeout(() => { if (fc.parentNode) fc.parentNode.removeChild(fc); }, 300); }
+        stepIndex++; setTimeout(displayNextStep, step.delay);
     }
-
-    // Start the animation
-    codeDisplay.innerHTML = '';
-    setTimeout(displayNextStep, 500);
+    codeDisplay.innerHTML = ''; setTimeout(displayNextStep, 500);
 
     // ========== SCROLL REVEAL ==========
     const obs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
@@ -585,26 +490,42 @@
     // ========== NAV ==========
     window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.querySelectorAll('.nav-links a').forEach(l=>{const s=document.querySelector(l.getAttribute('href'));if(s&&window.scrollY>=s.offsetTop-250){document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));l.classList.add('active');}});});
 
-    // ========== DATA ==========
+    // ========== PROJECTS DATA ==========
     const projectsData=[{title:'InteliWFA',desc:'Web Application Firewall.',tags:['Python','Flask','Mitmproxy','REST API','JSON','HTML/CSS'],img:'static/inteliwfa.png',links:[{text:'GitHub',url:'https://github.com/rutikavhad/InteliWFA_Web_Dashboard_-_Control_Panel'}]},
     {title:'Pune Metro Live Train Tracker',desc:'A real-time transit dashboard visualization showcasing live train tracking, a normalized PostgreSQL database schema, and active collision prevention logic for the Pune Metro system',tags:['Python','Flask','PostgreSQL','HTML/CSS','REST API'],img:'static/punem.png',links:[{text:'GitHub',url:'https://github.com/rutikavhad/Pune_Metro_Live_Train_Tracker'}]},
     {title:'Automated Authentication & Access Control Vulnerability Scanner',desc:'An automated security audit dashboard displaying active URL crawling, endpoint discovery logs, vulnerability risk metrics, and deep-dive scanning results against targeted testing labs like OWASP Juice Shop.',tags:['Vue.js','Flask','Redis'],img:'static/auto.png',links:[{text:'GitHub',url:'https://github.com/rutikavhad/Authentication_-_Access_Control_Vulnerability_Scanner'}]},
     {title:'MotoMart – Car Buy & Sell Web Application',desc:'A comprehensive full-stack e-commerce marketplace dashboard demonstrating responsive car listings, user session authentication management, and complete CRUD functionality powered by a Python, Django, and PostgreSQL backend.',tags:['Python','Django','PostgreSQL','HTML/CSS','REST API'],img:'static/car.png',links:[{text:'GitHub',url:'https://github.com/rutikavhad/MotoMart'}]},
     {title:'IA-32 Assembler',desc:'A low-level binary engineering interface showcasing a complete 2-pass assembly translation pipeline that processes x86 IA-32 instruction sets, builds complex ModR/M and SIB addressing encodings, and synthesizes raw executable machine code (op.bin).',tags:['C','DSA','MakeFile','NDISASM','Binary Analysis'],img:'static/ass.png',links:[{text:'GitHub',url:'https://github.com/rutikavhad/Assembler'}]},
     ];
-    const certsData=[{title:'',issuer:'',year:'',img:'',verify:'#'}
+    
+
+    // ========== CERTIFICATES DATA ==========
+    const certsData=[
+        {title:'Certified Ethical Hacker (CEH)',issuer:'Udemy',year:'2026',img:'static/hack.jpg',verify:'https://www.udemy.com/certificate/UC-2d7aa897-a03e-465e-a473-539ad13f4805/'},
+        {title:'Certified Django & Python Developer',issuer:'Udemy',year:'2026',img:'static/django.jpg',verify:'https://www.udemy.com/certificate/UC-e4cf6b96-14e4-458c-a79b-73c77f353a71/'},
+        {title:'Certified Flask Developer',issuer:'Udemy',year:'2026',img:'static/flask.jpg',verify:'https://www.udemy.com/certificate/UC-ed528328-a0c0-45e0-8536-a79be9334535/'},
+        {title:'PostgreSQL',issuer:'Udemy',year:'2026',img:'static/post.jpg',verify:'https://www.udemy.com/certificate/UC-f41c4c46-346d-4a2d-b045-18066a177a46/'}
     ];
 
-    // Render projects with proper data attributes
-document.getElementById('projectsGrid').innerHTML = projectsData.map((p, index) => `
+    // Render Projects
+// Add this after your projectsData definition to debug
+console.log('Total projects:', projectsData.length);
+
+// Render Projects with debug info
+const projectsGrid = document.getElementById('projectsGrid');
+projectsGrid.innerHTML = projectsData.map((p, index) => `
     <div class="project-card" data-index="${index}" onclick="openProjectModal(${index})">
         <div class="project-image">
             <img src="${p.img}" alt="${p.title}">
             <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.8);padding:1rem;">
                 <h3 style="color:white;">${p.title}</h3>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.8rem;">Project ${index + 1} of ${projectsData.length}</p>
             </div>
         </div>
     </div>`).join('');
+
+// Log to check if all projects are rendered
+console.log('Projects rendered:', document.querySelectorAll('.project-card').length);
     document.getElementById('certsGrid').innerHTML = certsData.map((c, index) => `
     <div class="certificate-card" data-index="${index}" onclick="openCertModal(${index})">
         <div class="certificate-thumb"><img src="${c.img}" alt="${c.title}"></div>
@@ -615,7 +536,8 @@ document.getElementById('projectsGrid').innerHTML = projectsData.map((p, index) 
             <div class="cert-meta">${c.year}</div>
         </div>
     </div>`).join('');
-// New modal functions
+
+    // ========== MODAL FUNCTIONS ==========
 function openProjectModal(index) {
     const p = projectsData[index];
     if (!p) return;
@@ -645,62 +567,36 @@ function openProjectModal(index) {
     document.body.style.overflow = 'hidden';
 }
 
+
     function openCertModal(index) {
-        const c = certsData[index];
-        if (!c) return;
-        
-        const overlay = document.getElementById('modalOverlay');
-        const content = document.getElementById('modalContent');
-        
-        let html = `
-            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            <img src="${c.img}" alt="${c.title}">
-            <h2>${c.title}</h2>
-            <p style="color:var(--text-muted);margin-bottom:1rem;">${c.issuer} • ${c.year}</p>
-        `;
-        
-        if (c.verify && c.verify !== '#') {
-            html += `<a href="${c.verify}" target="_blank" class="verify-link">🔗 Verify Certificate</a>`;
-        }
-        
-        content.innerHTML = html;
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        const c = certsData[index]; if (!c) return;
+        const overlay = document.getElementById('modalOverlay'), content = document.getElementById('modalContent');
+        let html = `<button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <img src="${c.img}" alt="${c.title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23151a21%22/%3E%3Ctext x=%22200%22 y=%22110%22 text-anchor=%22middle%22 fill=%22%237c4dff%22 font-size=%2215%22%3E📜 ${c.title}%3C/text%3E%3C/svg%3E'">
+            <h2>${c.title}</h2><p style="color:var(--text-muted);margin-bottom:1rem;">${c.issuer} • ${c.year}</p>`;
+        if (c.verify && c.verify !== '#') html += `<a href="${c.verify}" target="_blank" class="verify-link">🔗 Verify Certificate</a>`;
+        content.innerHTML = html; overlay.classList.add('open'); document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() {
-        document.getElementById('modalOverlay').classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    // Modal overlay click to close
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-
-    // Escape key to close
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-    document.getElementById('modalOverlay').addEventListener('click',(e)=>{if(e.target===e.currentTarget)closeModal();});
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeModal();});
+    function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 
     // ========== TERMINAL ==========
     const tp=document.getElementById('terminalPopup'),tb=document.getElementById('terminalBody'),ti=document.getElementById('terminalCmdInput');
     let msgStep=0,msgData={};
     document.getElementById('terminalToggleBtn').addEventListener('click',()=>{tp.classList.add('open');ti.focus();});
     document.getElementById('terminalCloseBtn').addEventListener('click',()=>tp.classList.remove('open'));
-
     function addTermLine(text,cls='out'){const d=document.createElement('div');d.className='terminal-line';d.innerHTML=`<span class="${cls}">${text}</span>`;tb.appendChild(d);tb.scrollTop=tb.scrollHeight;}
     function typeLines(lines,cls='out',delay=120){let idx=0;function show(){if(idx<lines.length){if(lines[idx].trim()===''){addTermLine('',cls);idx++;show();}else{addTermLine(lines[idx],cls);idx++;setTimeout(show,delay);}}}show();}
-
     const commands={
-        help:()=>['📋 Available Commands:','─────────────────────────','  about        → Learn more about me','  projects     → View my key works','  journey      → My academic & career path','  skills       → Technical stack','  resume       → Download my CV','  contact      → Get in touch','  clear        → Clear terminal screen','  message      → Send me a message','─────────────────────────','🎮 Fun Commands:','  motivation   → Random dev quote','  bug          → Today\'s bug stats','  status       → System status','  hireme       → Why hire me?','  life         → Current life status'],
+        help:()=>['📋 Available Commands:','─────────────────────────','  about        → Learn more about me','  projects     → View my key works','  journey      → My academic & career path','  skills       → Technical stack','  resume       → Download my Developer Resume','  resume_x      → Download my Security Resume','  contact      → Get in touch','  clear        → Clear terminal screen','  message      → Send me a message','─────────────────────────','🎮 Fun Commands:','  motivation   → Random dev quote','  bug          → Today\'s bug stats','  status       → System status','  hireme       → Why hire me?','  life         → Current life status'],
         about:()=>['👨‍💻 Name: Rutik Avhad','📍 Location: Pune, India','🎓 MSc CS @ Savitribai Pune Pune University','💼 Full Stack Developer','🔧 Python,Django, Flask, PostgreSQL'],
         projects:()=>['📂 Projects:','1. InteliWFA','2. Pune Metro live train tracking system','& More.'],
         journey:()=>['🛤️ Journey:','📍 2024-2026: MSc CS @ PUCSD','📍 2021-2024: BSc @ RBNB Collage'],
         skills:()=>['🛠️ Skills:','🎨 Frontend: HTML, CSS, JS','⚙️ Backend: Django, Flask, Python','🗄️ Database: PostgreSQL, MONGODB','☁️ DevOps: Docker, Git, Linux'],
-        resume:()=>{window.open('https://drive.google.com/file/d/1pbQlNucWHP4YDmSJnPteppxpUDRLFI_b/view?usp=sharing');return['📄 Opening resume...','✅ Check your downloads'];},
+        resume:()=>{window.open('https://drive.google.com/file/d/1aEqhrsDzT65pklJOVvke_6ttVVVe5CjP/view?usp=sharing');return['📄 Opening resume...','✅ Check your downloads'];},
+        resume_x:()=>{window.open('https://drive.google.com/file/d/1H3AMNn3E0alYWzK_cGvJ2YBKlqHlN-F_/view?usp=sharing');return['📄 Opening resume...','✅ Check your downloads'];},
         contact:()=>['📬 Contact:','📧 rutikavhad2211@gmail.com','🐙 GitHub: rutikavhad','💡 Type "message" to send!'],
         clear:()=>{tb.innerHTML='';return[];},
         motivation:()=>{const q=['"It\'s not a bug – it\'s a feature."','"Keep coding!"','"Code is poetry."'];return['💭 '+q[Math.floor(Math.random()*q.length)]];},
@@ -710,9 +606,7 @@ function openProjectModal(index) {
         life:()=>['🐛 Eating bugs | 💻 Coding | 📚 Learning'],
         message:()=>{msgStep=0;msgData={};return['📝 Enter your message:'];}
     };
-
     async function sendEmail(d){window.open(`mailto:rutikavhad2211@gmail.com?subject=Portfolio: ${d.name||'Visitor'}&body=Name: ${d.name}%0AEmail: ${d.email}%0A%0A${d.message}`,'_blank');return true;}
-
     ti.addEventListener('keydown',async function(e){
         if(e.key!=='Enter')return;
         const cmd=this.value.trim();this.value='';
@@ -728,7 +622,6 @@ function openProjectModal(index) {
         if(handler){const result=handler();if(Array.isArray(result))typeLines(result,'out',100);if(cmd.toLowerCase()==='message')msgStep=1;}
         else{addTermLine(`zsh: command not found: ${cmd}`,'err');setTimeout(()=>addTermLine('💡 Type "help"','out'),300);}
     });
-
     document.getElementById('hamburgerBtn').addEventListener('click',()=>{const nl=document.getElementById('navLinks');nl.style.display=nl.style.display==='flex'?'none':'flex';nl.style.flexDirection='column';nl.style.position='absolute';nl.style.top='100%';nl.style.left='0';nl.style.right='0';nl.style.background='var(--surface)';nl.style.padding='1rem';nl.style.borderRadius='0 0 20px 20px';nl.style.border='1px solid var(--border)';});
 </script>
 </body>
